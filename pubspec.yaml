@@ -1,18 +1,17 @@
 name: iptv_player_mvp
+description: Aplicativo IPTV com login e player Flutter
 publish_to: 'none'
-description: MVP de player IPTV com login MAC/Key e M3U.
-version: 0.1.0
 
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
-  http: ^1.2.2
-  shared_preferences: ^2.3.2
-  video_player: ^2.8.6
+  http: ^1.2.0
+  shared_preferences: ^2.2.2
+  video_player: ^2.7.2
 
 dev_dependencies:
   flutter_test:
