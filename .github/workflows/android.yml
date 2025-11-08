@@ -1,44 +1,37 @@
-name: build-android-apk
+name: Build Android APK
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch: {}
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Java 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "17"
-
-      - name: Setup Flutter
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.24.0"
-          channel: "stable"
-          cache: true
+          flutter-version: '3.19.0'
 
-      - name: Flutter pub get
+      - name: Install dependencies
         run: flutter pub get
 
-      # Opcional: roda testes se você tiver
-      # - name: Flutter test
-      #   run: flutter test
+      - name: Create new Flutter project structure if needed
+        run: |
+          if [ ! -d "android" ]; then
+            flutter create .
+          fi
 
-      - name: Build APK (release unsigned)
+      - name: Build APK (release)
         run: flutter build apk --release
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-release
+          name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
-          if-no-files-found: error
